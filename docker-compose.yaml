@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  db:
+    image: surrealdb/surrealdb:latest
+    container_name: surrealdb
+    command: start file:/var/lib/surrealdb/data/test.db
+    volumes:
+      - .db_data:/var/lib/surrealdb/data
+    ports:
+      - 8000:8000
+volumes:
+  .db-data:
+    
