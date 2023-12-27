@@ -3,6 +3,7 @@
 
 # Environment variables
 /.env*
+!/.env.sample
 
 # db data
 /.db_data
