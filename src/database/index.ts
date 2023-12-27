@@ -16,15 +16,15 @@ export async function getDb(): Promise<Surreal> {
   logger.info('establishing connection to database');
   try {
     await surreal.connect(DB_URI, {
-      database: DB_NAME,
-      namespace: DB_NAMESPACE,
-      auth: {
-        database: DB_NAME,
-        namespace: DB_NAMESPACE,
-        scope: 'service-user',
-        username: DB_USER,
-        password: DB_PASS,
-      },
+      database: 'test',
+      namespace: 'test',
+      // auth: {
+      //   database: DB_NAME,
+      //   namespace: DB_NAMESPACE,
+      //   scope: 'service-user',
+      //   username: DB_USER,
+      //   password: DB_PASS,
+      // },
     });
     await surreal.wait();
     logger.info('connected to database');

@@ -58,7 +58,7 @@ export async function configureApp({
   /* Register application routes */
   for (const group of routeGroups) {
     app.use(group.basePath, group.router);
-    logger.info('Mounted route group', group.basePath);
+    logger.info({ basePath: group.basePath }, 'Mounted route group');
   }
 
   /* Catch all route for unhandled requests */

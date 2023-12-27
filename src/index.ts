@@ -1,9 +1,11 @@
 import { getServerLogger } from './logger';
 import { run } from './server';
 
+import { routeGroup as personsRouteGroup } from './modules/persons/routes';
+
 const SERVER_CONFIGURATION = {
   name: 'bun-surreal-test',
-  routes: [],
+  routes: [personsRouteGroup],
 };
 
 export async function main() {
