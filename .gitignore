@@ -7,3 +7,5 @@
 
 # db data
 /.db_data
+
+/dist
