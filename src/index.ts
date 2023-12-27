@@ -1,14 +1,14 @@
 import { getServerLogger } from './logger';
 import { run } from './server';
 
-const logger = getServerLogger();
-
 const SERVER_CONFIGURATION = {
   name: 'bun-surreal-test',
   routes: [],
 };
 
-async function main() {
+export async function main() {
+  const logger = getServerLogger();
+
   try {
     await run(SERVER_CONFIGURATION);
   } catch (err) {

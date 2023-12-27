@@ -1,8 +1,12 @@
-import pino from 'pino';
+import pino, { LoggerExtras } from 'pino';
 
-type LogLevel = 'info' | 'warn' | 'debug' | 'trace' | 'fatal' | 'error';
+export type LogLevel = 'info' | 'warn' | 'debug' | 'trace' | 'fatal' | 'error';
 
 export function getServerLogger() {
-  const logger = pino<LogLevel>();
-  return logger.child({ component: 'server' });
+  const logger = pino();
+  return logger.child<LogLevel>({ component: 'server' });
 }
+
+export type ServerLogger = ReturnType<typeof getServerLogger>;
+
+const log = getServerLogger();
