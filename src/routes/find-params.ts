@@ -3,8 +3,8 @@ import { OrderDirection } from '../database/types';
 export type FindParams<T extends Record<string, unknown>> = {
   sortField: keyof T;
   sortDirection: OrderDirection;
-  pageSize: number;
-  pageNum: number;
+  pageSize: string;
+  pageNum: string;
 };
 
 export function parseFindParams<T extends Record<string, unknown>>({
@@ -18,8 +18,15 @@ export function parseFindParams<T extends Record<string, unknown>>({
   orderBy: keyof T;
   orderDirection: OrderDirection;
 } {
-  const limit = pageSize;
-  const start = (pageNum - 1) * pageSize;
+  const pageNumInt = parseInt(pageNum);
+  const pageSizeInt = parseInt(pageSize);
+
+  if (typeof pageNumInt !== 'number' && typeof pageSizeInt !== 'number') {
+    throw new Error('Invalid pageNum or pageSize: BAD_REQUEST');
+  }
+
+  const limit = pageSizeInt;
+  const start = (pageNumInt - 1) * pageSizeInt;
 
   return {
     limit,

@@ -3,7 +3,7 @@ services:
   db:
     image: surrealdb/surrealdb:latest
     container_name: surrealdb
-    command: start --log trace file:/var/lib/surrealdb/data/test.db
+    command: start --log info file:/var/lib/surrealdb/data/test.db
     volumes:
       - .db_data:/var/lib/surrealdb/data
     ports:

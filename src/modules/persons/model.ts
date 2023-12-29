@@ -1,7 +1,7 @@
 import { getDb } from '../../database';
 import { InvalidOrderByPropertyError, InvalidOrderDirectionError } from '../../database/errors';
 import { OrderDirection, isOrderDirection } from '../../database/types';
-import { Person, PersonOrderByField, isPersonOrderByField } from './types';
+import { Person, PersonId, PersonOrderByField, isPersonOrderByField } from './types';
 
 export async function find({
   limit,
@@ -33,4 +33,17 @@ export async function find({
 
   const persons = await db.query<Person[]>(query, { limit, start });
   return persons;
+}
+
+export type PersonWithArtistsOrderedFrom = Person & { artists_order_from: string[] };
+export async function getPersonWithArtistsOrderedFrom(id: PersonId): Promise<PersonWithArtistsOrderedFrom> {
+  const db = await getDb();
+
+  const query = `
+    SELECT ->order->product<-create<-artist.name as artists_ordered_from, * FROM person
+    WHERE id = $id;
+  `;
+
+  const [person] = await db.query<PersonWithArtistsOrderedFrom[]>(query, { id });
+  return person;
 }
